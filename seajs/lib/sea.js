@@ -28,11 +28,11 @@ function runSeaJS(filepath) {
   vm.runInNewContext(code, sandbox, "sea-debug.vm") // TAG args: 代码，上下文隔离的对象，堆栈跟踪信息所使用的文件名
 
   global.seajs = sandbox.exports.seajs
-  global.define = sandbox.exports.define // ? define从哪里来
+  global.define = sandbox.exports.define // ? define从哪里来 ： sea-debug.js执行后获得
 }
 
 function hackNative() {
-  var Module = module.constructor // ? module哪里来
+  var Module = module.constructor // ? module哪里来 ： sea-debug.js执行后获得
   nativeLoad = Module._load
 
   // TAG 扩展Module._load

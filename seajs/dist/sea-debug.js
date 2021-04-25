@@ -83,8 +83,8 @@ var emit = seajs.emit = function(name, data) {
   var list = events[name]
 
   if (list) {
-    // Copy callback lists to prevent modification
-    list = list.slice()
+    // Copy callback lists to prevent modification(修改)
+    list = list.slice() // TAG 利用数组slice方法进行copy，浅拷贝，不过list为一维数组，适用
 
     // Execute event callbacks, use index because it's the faster.
     for(var i = 0, len = list.length; i < len; i++) {
@@ -136,7 +136,7 @@ function realpath(path) {
 
 // Normalize an id
 // normalize("path/to/a") ==> "path/to/a.js"
-// NOTICE: substring is faster than negative slice and RegExp
+// TAG NOTICE: substring is faster than negative slice and RegExp
 function normalize(path) {
   var last = path.length - 1
   var lastC = path.charCodeAt(last)
@@ -786,6 +786,7 @@ Module.resolve = function(id, refUri) {
 
 // Define a module
 Module.define = function (id, deps, factory) {
+  // TAG 接口多态
   var argsLen = arguments.length
 
   // define(factory)
@@ -897,7 +898,7 @@ seajs.use = function(ids, callback) {
 }
 
 Module.define.cmd = {}
-global.define = Module.define
+global.define = Module.define // TAG 全局定义了define
 
 
 // For Developers
